@@ -1,0 +1,287 @@
+--> SQL - Structured Query Language
+--> SQL is a standard language for storing, manipulating and retrieving data in databases.
+
+--> RDBMS - Relational Database Management System
+--> The data in RDBMS is stored in database objects called tables.
+ 
+--> A table is a collection of related data entries and it consists of columns and rows.
+
+--> SQL keywords are NOT case sensitive: select is the same as SELECT.
+
+--> Comments : 
+Single line comments start with --.
+Multi-line comments start with /* and end with */.
+Any text between -- and any text between  /* and */ will be ignored.
+
+--> SQL Data Types :
+    1) String Data types     2) Numeric Data types     3)  Date and time Data types
+	
+--> Types of Operator :
+	1) SQL Arithmetic Operators : + , - , * , / , %
+	2) SQL Comparison Operators : = , != , > , >= , < , <= 
+	3) SQL Logical Operators    : ALL , AND , OR , BETWEEN , IN , NOT , ANY , LIKE 
+	4) SQL Set Operators        : Union , Union ALL , Intersect , Minus
+	5) SQL Bit-wise Operators   : Bitwise AND (&) , Bitwise OR (|) 
+	6) SQL Unary Operators      : Unary Positive (+) , Unary Negative (-) , Unary Bitwise NOT (~)
+ 
+--> Aggregate functions : COUNT(), MAX(), MIN(), SUM(), AVG()
+
+--> Create Table :
+Syntax : CREATE TABLE table_name (
+    column1 datatype,
+    column2 datatype,
+    column3 datatype,
+   ....
+);
+
+Ex : Create table Employee (
+		 empid int,
+		 firstname varchar(100),
+		 lastname varchar(100),
+		 birthdate Date,
+		 city varchar(100)
+	 );
+
+--> Insert Data : The INSERT INTO statement is used to insert new records in a table.
+Syntax : INSERT INTO table_name VALUES (value1, value2, value3, ...);     or 
+         INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
+		 
+Ex : insert into bakery values(1,'coco',35);
+
+--> Update Data : The UPDATE statement is used to modify the existing records in a table.
+Syntax : UPDATE table_name SET column1 = value1, column2 = value2, ...WHERE condition;
+
+Ex : update Bakery set product_name = 'coco' where product_id = 9;
+
+--> Delete Data : The DELETE statement is used to delete existing records in a table. 
+Suntax : DELETE FROM table_name WHERE condition;
+Ex : DELETE FROM Bakery WHERE product_name='mango';
+
+  -> DELETE FROM table_name; (table ni andar na badha record delete thase.)
+ Ex : delete from Bakery;
+ 
+--> Select : The SELECT statement is used to select data from a database.
+Syntax : Select * from table_name;
+Ex :    select * from Bakery;
+
+--> SELECT DISTINCT : The SELECT DISTINCT statement is used to return only distinct (different) values.
+Syntax : SELECT DISTINCT column1, column2, ... FROM table_name;
+Ex : SELECT DISTINCT Country FROM Customers;
+
+--> SQL WHERE Clause : The WHERE clause is used to filter records. 
+Syntax : SELECT column1, column2, ... FROM table_name WHERE condition;
+Ex : SELECT * FROM Customers WHERE Country='Mexico';
+
+--> Drop : 
+(Data base ne data sathe delete krse.)
+Suntax : DROP DATABASE databasename;
+Ex : DROP DATABASE Bakery;
+
+-->  ALTER TABLE :
+The ALTER TABLE statement is used to add, delete, or modify columns in an existing table.
+The ALTER TABLE statement is also used to add and drop various constraints on an existing table.
+
+--> AND : The AND operator displays a record if all the conditions separated by AND are TRUE.
+Syntax : SELECT column1, column2, ... FROM table_name WHERE condition1 AND condition2 AND condition3 ...;
+Ex : SELECT * FROM Customers WHERE Country='Germany' AND City='Berlin';
+
+--> OR : The OR operator displays a record if any of the conditions separated by OR is TRUE. 
+Syntax : SELECT column1, column2, ... FROM table_name WHERE condition1 OR condition2 OR condition3 ...;
+Ex : SELECT * FROM Customers WHERE City='Berlin' OR City='München'; 
+
+--> NOT : The NOT operator displays a record if the condition(s) is NOT TRUE.
+Syntax : SELECT column1, column2, ... FROM table_name WHERE NOT condition;
+Ex : SELECT * FROM Customers WHERE NOT Country='Germany';
+
+--> ORDER BY : The ORDER BY keyword is used to sort the result-set in ascending or descending order. (ascending order - default)
+Syntax : SELECT column1, column2, ... FROM table_name ORDER BY column1, column2, ... ASC|DESC;
+Ex : SELECT * FROM Customers ORDER BY Country DESC;
+
+--> IS NULL : The IS NULL operator is used to test for empty values (NULL values).
+Syntax : SELECT column_names FROM table_name WHERE column_name IS NULL;
+Ex : SELECT CustomerName, ContactName, Address FROM Customers WHERE Address IS NULL;
+
+--> IS NOT NULL : The IS NOT NULL operator is used to test for non-empty values (NOT NULL values).
+Syntax : SELECT column_names FROM table_name WHERE column_name IS NOT NULL;
+Ex : SELECT CustomerName, ContactName, Address FROM Customers WHERE Address IS NOT NULL;
+
+--> MIN() : The MIN() function returns the smallest value of the selected column.
+Syntax : SELECT MIN(column_name) FROM table_name WHERE condition;
+Ex : SELECT MIN(product_prize) AS SmallestPrice FROM Bakery;
+
+--> MAX() : The MAX() function returns the largest value of the selected column.
+Syntax : SELECT MAX(column_name) FROM table_name WHERE condition;
+Ex : SELECT MAX(product_prize) AS LargestPrice FROM Bakery;
+
+--> Limit :
+Ex : SELECT * FROM Customers LIMIT 3;
+
+--> Count() : The COUNT() function returns the number of rows that matches a specified criterion.
+Suntax : SELECT COUNT(column_name) FROM table_name WHERE condition;
+Ex : SELECT COUNT(product_id) FROM Bakery;
+
+--> AVG() : The AVG() function returns the average value of a numeric column. 
+Suntax : SELECT AVG(column_name) FROM table_name WHERE condition;
+Ex : SELECT AVG(product_prize) FROM Bakery;
+
+--> SUM() : The SUM() function returns the total sum of a numeric column. 
+Syntax : SELECT SUM(column_name) FROM table_name WHERE condition;
+Ex : SELECT SUM(product_prize) FROM Bakery;
+
+--> There are two wildcards often used in conjunction with the LIKE operator:
+    1) The percent sign (%) represents zero, one, or multiple characters
+    2) The underscore sign (_) represents one, single character
+	
+--> LIKE : The LIKE operator is used in a WHERE clause to search for a specified pattern in a column. 
+Syntax : SELECT column1, column2, ... FROM table_name WHERE columnN LIKE pattern;
+Ex : SELECT * FROM Bakery WHERE product_name LIKE '_r%';
+
+--> In : The IN operator allows you to specify multiple values in a WHERE clause.
+Syntax : SELECT column_name(s) FROM table_name WHERE column_name IN (value1, value2, ...);
+Ex : SELECT * FROM Customers WHERE Country IN ('Germany', 'France', 'UK');        OR
+
+Syntax : SELECT column_name(s) FROM table_name WHERE column_name IN (SELECT STATEMENT);
+Ex : SELECT * FROM Customers WHERE Country IN (SELECT Country FROM Suppliers);
+
+--> BETWEEN : The BETWEEN operator selects values within a given range. 
+Syntax : SELECT column_name(s) FROM table_name WHERE column_name BETWEEN value1 AND value2;
+Ex : SELECT * FROM Products WHERE Price BETWEEN 10 AND 20;
+
+--> Join :
+A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+
+--> Types of Join :
+   -> Inner Join : Returns records that have matching values in both tables. 
+                   (banne table ma match thata hase ava record return krse.)
+	Syntax : SELECT column_name(s) FROM table1 INNER JOIN table2 ON table1.column_name = table2.column_name;
+	Ex :  SELECT Orders.OrderID, Customers.CustomerName FROM Orders INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
+	
+	---> Three table Join Ex :
+	    SELECT Orders.OrderID, Customers.CustomerName, Shippers.ShipperName FROM ((Orders INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID) 
+		INNER JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID);
+	
+   -> Left Join  : Returns all records from the left table, and the matched records from the right table.
+                   (left side na badha & right side ma je match thata hase ava record return krse.)
+	Syntax : SELECT column_name(s) FROM table1 LEFT JOIN table2 ON table1.column_name = table2.column_name;
+	Ex : SELECT Customers.CustomerName, Orders.OrderID FROM Customers LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID ORDER BY Customers.CustomerName;
+	
+   -> Right Join : Returns all records from the right table, and the matched records from the left table.
+                   (right side na badha & left side ma je match thata hase ava record return krse.)
+	Syntax : SELECT column_name(s) FROM table1 RIGHT JOIN table2 ON table1.column_name = table2.column_name;
+	Ex : SELECT Orders.OrderID, Employees.LastName, Employees.FirstName FROM Orders RIGHT JOIN Employees ON 
+	     Orders.EmployeeID = Employees.EmployeeID ORDER BY Orders.OrderID;
+		 
+   -> Full Join  : Returns all records when there is a match in either left or right table.
+                   (banne table ma badha record match hoi tyare badha record return krse.)
+	Syntax : SELECT column_name(s) FROM table1FULL OUTER JOIN table2 ON table1.column_name = table2.column_name WHERE condition;
+	Ex : SELECT Customers.CustomerName, Orders.OrderID FROM Customers FULL OUTER JOIN Orders ON 
+	     Customers.CustomerID=Orders.CustomerID ORDER BY Customers.CustomerName;
+				
+--> Self Join :
+A self join is a regular join, but the table is joined with itself.
+Syntax : SELECT column_name(s) FROM table1 T1, table1 T2 WHERE condition;
+
+--> SQL UNION :
+The UNION operator is used to combine the result-set of two or more SELECT statements.
+Every SELECT statement within UNION must have the same number of columns.
+The columns must also have similar data types.
+The columns in every SELECT statement must also be in the same order.
+
+Syntax : SELECT column_name(s) FROM table1 UNION SELECT column_name(s) FROM table2;
+Ex : SELECT City FROM Customers UNION SELECT City FROM Suppliers ORDER BY City;
+
+--> UNION ALL :
+The UNION operator selects only distinct values by default. To allow duplicate values, use UNION ALL.
+Syntax : SELECT column_name(s) FROM table1 UNION ALL SELECT column_name(s) FROM table2;
+Ex : SELECT City FROM Customers UNION ALL SELECT City FROM Suppliers ORDER BY City;
+
+--> SQL UNION With WHERE Ex :
+SELECT City, Country FROM Customers WHERE Country='Germany' UNION SELECT City, Country FROM Suppliers WHERE Country='Germany' ORDER BY City;
+
+--> SQL UNION ALL With WHERE Ex :
+SELECT City, Country FROM Customers WHERE Country='Germany' UNION ALL SELECT City, Country FROM Suppliers WHERE Country='Germany' ORDER BY City;
+
+--> GROUP BY :
+The GROUP BY statement groups rows that have the same values into summary rows. 
+The GROUP BY statement is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) to group the result-set by one or more columns.
+
+Syntax : SELECT column_name(s) FROM table_name WHERE condition GROUP BY column_name(s) ORDER BY column_name(s);
+Ex : SELECT COUNT(CustomerID), Country FROM Customers GROUP BY Country;
+
+--> GROUP BY With JOIN Example :
+SELECT Shippers.ShipperName, COUNT(Orders.OrderID) AS NumberOfOrders FROM Orders LEFT JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID GROUP BY ShipperName;
+
+--> HAVING Clause :
+The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.
+Suntax : SELECT column_name(s) FROM table_name WHERE condition GROUP BY column_name(s) HAVING condition ORDER BY column_name(s);
+Ex : SELECT COUNT(CustomerID), Country FROM Customers GROUP BY Country HAVING COUNT(CustomerID) > 5;
+
+--> HAVING With JOIN Exaple :
+SELECT Employees.LastName, COUNT(Orders.OrderID) AS NumberOfOrders FROM (Orders INNER JOIN Employees ON Orders.EmployeeID = Employees.EmployeeID) 
+GROUP BY LastName HAVING COUNT(Orders.OrderID) > 10;
+
+--> SQL EXISTS Operator :
+The EXISTS operator is used to test for the existence of any record in a subquery.
+The EXISTS operator returns TRUE if the subquery returns one or more records.
+Syntax : SELECT column_name(s) FROM table_name WHERE EXISTS (SELECT column_name FROM table_name WHERE condition);
+Ex : SELECT SupplierName FROM Suppliers WHERE EXISTS (SELECT ProductName FROM Products WHERE Products.SupplierID = Suppliers.supplierID AND Price < 20);
+
+--> SELECT INTO :
+The SELECT INTO statement copies data from one table into a new table.
+(ek table mathi data ne new table ma copy kre 6.)
+Syntax : Copy all columns into a new table :
+         SELECT * INTO newtable [IN externaldb] FROM oldtable WHERE condition;
+	   : Copy only some columns into a new table :
+         SELECT column1, column2, column3, ...INTO newtable [IN externaldb] FROM oldtable WHERE condition;
+	Ex : SELECT * INTO CustomersGermany FROM Customers WHERE Country = 'Germany';
+
+		 
+--> INSERT INTO SELECT :
+The INSERT INTO SELECT statement copies data from one table and inserts it into another table.
+(ek table mathi data copies kri ne bija table ma insert kre 6.)
+The INSERT INTO SELECT statement requires that the data types in source and target tables match. 
+Syntax : Copy all columns from one table to another table :
+         INSERT INTO table2 SELECT * FROM table1 WHERE condition;
+	   : Copy only some columns from one table into another table :
+         INSERT INTO table2 (column1, column2, column3, ...) SELECT column1, column2, column3, ...FROM table1 WHERE condition;
+	Ex : INSERT INTO Customers (CustomerName, City, Country) SELECT SupplierName, City, Country FROM Suppliers;	 
+	
+--> Stored Procedure :
+A stored procedure is a prepared SQL code that you can save, so the code can be reused over and over again.
+Syntax : Stored Procedure :
+         CREATE PROCEDURE procedure_name AS sql_statement GO;
+	Ex : CREATE PROCEDURE SelectAllCustomers AS SELECT * FROM Customers GO;
+	
+	   : Execute a Stored Procedure
+		 EXEC procedure_name;
+	Ex : EXEC SelectAllCustomers;
+
+--> Primary Key (PK) : 
+The PRIMARY KEY constraint uniquely identifies each record in a table.
+Primary keys must contain UNIQUE values, and cannot contain NULL values.	
+When multiple columns are used as a primary key, it is known as composite primary key.
+A primary key cannot have null value and duplicate value. 
+
+Ex : ID int NOT NULL PRIMARY KEY - one column primary key
+Ex : CONSTRAINT PK_Person PRIMARY KEY (ID,LastName) - multiple columns primary key 
+
+--> FOREIGN KEY :
+The FOREIGN KEY constraint is used to prevent actions that would destroy links between tables.
+A FOREIGN KEY is a field (or collection of fields) in one table, that refers to the PRIMARY KEY in another table.
+The table with the foreign key is called the child table, and the table with the primary key is called the referenced or parent table.
+
+--> CHECK Constraint :
+The CHECK constraint is used to limit the value range that can be placed in a column.
+Ex :   Age int CHECK (Age>=18) - one column
+Ex : CONSTRAINT CHK_Person CHECK (Age>=18 AND City='Sandnes') - multiple column
+
+--> DEFAULT Constraint :
+The DEFAULT constraint is used to set a default value for a column.
+Ex : City varchar(255) DEFAULT 'Sandnes'
+
+--> Unique Key :
+A unique key is a set of one or more than one fields/columns of a table that uniquely identify a record in a database table.
+Ex : S_Id int NOT NULL UNIQUE
+
+--> 
+
